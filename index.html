@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your First Basket</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Build your first basket in 30 seconds and see how 10-minute delivery fits your routine.">
+<style>
+:root{
+  --brand:#3b0a6b; --brand-2:#5b1d99; --accent:#e5157a; --accent-ink:#fff;
+  --bg:#f6f3fa; --surface:#fff; --ink:#1d1428; --muted:#6b6178; --line:#e6e0ee;
+  --ok:#0f8a4f; --chip:#f1ebf8; --chip-on:#3b0a6b; --chip-on-ink:#fff;
+  --radius:16px; --shadow:0 6px 24px rgba(59,10,107,.10);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#140d1d; --surface:#1f1630; --ink:#f3eefa; --muted:#b3a8c4; --line:#33284a;
+    --chip:#2a1f3e; --chip-on:#e5157a; --shadow:0 6px 24px rgba(0,0,0,.4); --ok:#39c47f;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#140d1d; --surface:#1f1630; --ink:#f3eefa; --muted:#b3a8c4; --line:#33284a;
+  --chip:#2a1f3e; --chip-on:#e5157a; --shadow:0 6px 24px rgba(0,0,0,.4); --ok:#39c47f;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:480px;margin:0 auto;padding-block:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.concept{background:#24063f;color:#e9dcf7;font-size:12px;text-align:center}
+.concept .wrap{padding-block:6px}
+.logo small{display:block;font-size:11px;font-weight:600;color:#d9c3f2;letter-spacing:0}
+
+/* Header */
+header{background:var(--brand);color:#fff}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+.logo{font-weight:800;font-size:20px;letter-spacing:-.5px}
+.logo span{color:#ff7ab8}
+.eta-pill{font-size:13px;background:rgba(255,255,255,.14);padding:6px 10px;border-radius:999px}
+
+/* Hero */
+.hero{background:linear-gradient(180deg,var(--brand) 0%,var(--brand-2) 100%);color:#fff;padding:20px 0 64px}
+.hero h1{font-size:28px;line-height:1.15;margin:4px 0 8px;letter-spacing:-.5px}
+.hero p{margin:0;color:#e9dcf7;font-size:15px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.badge{font-size:12px;font-weight:600;background:rgba(255,255,255,.14);padding:5px 10px;border-radius:999px}
+
+/* Widget card */
+.card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);
+  margin-top:-44px;padding:18px;position:relative;min-height:380px}
+.progress{display:flex;gap:6px;margin-bottom:14px}
+.progress i{flex:1;height:4px;border-radius:4px;background:var(--line);transition:background .25s}
+.progress i.on{background:var(--accent)}
+.step-label{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin:0}
+.q{font-size:21px;line-height:1.25;margin:4px 0 14px}
+.sub{color:var(--muted);font-size:14px;margin:-8px 0 14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;
+  background:var(--chip);border:2px solid transparent;border-radius:14px;padding:12px;min-height:76px;transition:transform .08s}
+.opt:active{transform:scale(.97)}
+.opt .em{font-size:22px;line-height:1}
+.opt b{font-size:15px}
+.opt small{color:var(--muted);font-size:12px}
+.opt[aria-pressed="true"]{border-color:var(--accent);background:var(--surface)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{background:var(--chip);border:0;border-radius:999px;padding:9px 14px;font-size:14px;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-ink)}
+.lbl{font-size:13px;font-weight:700;color:var(--muted);margin:2px 0 8px}
+.back{background:none;border:0;color:var(--muted);font-size:14px;padding:8px 0;margin-top:10px}
+.primary{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;border-radius:14px;
+  background:var(--accent);color:var(--accent-ink);font-weight:800;font-size:17px;padding:16px;margin-top:6px;
+  box-shadow:0 6px 18px rgba(229,21,122,.35)}
+.primary:disabled{opacity:.4;box-shadow:none;cursor:not-allowed}
+.secondary{width:100%;border:2px solid var(--line);background:none;border-radius:14px;padding:12px;font-weight:700;margin-top:10px}
+
+/* Intro */
+.intro-list{list-style:none;padding:0;margin:4px 0 18px}
+.intro-list li{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.intro-list li:last-child{border:0}
+.num{flex:0 0 28px;height:28px;border-radius:50%;background:var(--chip);color:var(--brand);font-weight:800;
+  display:grid;place-items:center;font-size:14px}
+:root[data-theme="dark"] .num{color:#ff7ab8}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .num{color:#ff7ab8}}
+
+/* Result */
+.result-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.eta{background:#e8f7ef;color:#0b6b3d;font-weight:800;font-size:13px;border-radius:10px;padding:6px 10px;white-space:nowrap}
+:root[data-theme="dark"] .eta{background:#163a28;color:#7fe0ad}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .eta{background:#163a28;color:#7fe0ad}}
+.items{list-style:none;margin:8px 0 0;padding:0}
+.item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.thumb{flex:0 0 44px;height:44px;border-radius:12px;background:var(--chip);display:grid;place-items:center;font-size:24px}
+.item .meta{flex:1;min-width:0}
+.item .nm{font-weight:650;font-size:14px;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.item{gap:10px}
+.item .sz{color:var(--muted);font-size:12px}
+.item .pr{font-weight:700;font-size:14px;min-width:52px;text-align:right}
+.stepper{display:flex;align-items:center;border:1.5px solid var(--accent);border-radius:10px;overflow:hidden}
+.stepper button{border:0;background:none;color:var(--accent);width:28px;height:30px;font-weight:800;font-size:16px}
+.stepper span{min-width:18px;text-align:center;font-weight:700;font-size:14px;color:var(--accent)}
+.fit{background:var(--chip);border-radius:14px;padding:12px 14px;margin:14px 0 4px;font-size:14px}
+.fit b{display:block;margin-bottom:2px}
+.totals{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-top:12px}
+.totals.grand{color:var(--ink);font-weight:800;font-size:17px;margin-top:4px}
+.save{color:var(--ok);font-weight:700}
+.fine{font-size:11px;color:var(--muted);margin:10px 0 0;text-align:center}
+
+/* Sheet */
+.scrim{position:fixed;inset:0;background:rgba(20,10,30,.5);display:none;align-items:flex-end;z-index:20}
+.scrim.show{display:flex}
+.sheet{background:var(--surface);width:100%;max-width:480px;margin:0 auto;border-radius:20px 20px 0 0;padding:22px 16px calc(22px + env(safe-area-inset-bottom));
+  animation:up .25s ease-out}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.tick{width:52px;height:52px;border-radius:50%;background:var(--ok);display:grid;place-items:center;margin:0 auto 10px}
+.sheet h2{text-align:center;margin:0 0 4px;font-size:20px}
+.sheet p{text-align:center;color:var(--muted);margin:0 0 14px;font-size:14px}
+
+/* Below the fold */
+section.why{padding:28px 0 8px}
+.why h2{font-size:18px;margin:0 0 12px}
+.why-grid{display:grid;gap:10px}
+.why-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;gap:12px}
+.why-card .em{font-size:22px}
+.why-card b{display:block;font-size:15px}
+.why-card span{color:var(--muted);font-size:13px}
+footer{padding:24px 0 40px;color:var(--muted);font-size:12px;text-align:center}
+footer a{color:inherit}
+.fade{animation:fade .22s ease-out}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="concept"><div class="wrap">Student case-study prototype · Not affiliated with or endorsed by Zepto</div></div>
+<header>
+  <div class="wrap">
+    <div class="logo">First Basket<small>A widget concept for Zepto</small></div>
+    <div class="eta-pill">⚡ 10-min delivery</div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <h1>Will Zepto work for you? Find out in 30 seconds.</h1>
+    <p>Answer three quick taps. We'll build a basket that fits your routine, so you can see what arrives in 10 minutes.</p>
+    <div class="badges"><span class="badge">No app download</span><span class="badge">No sign-up to try</span><span class="badge">3 taps</span></div>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="card" id="card" aria-live="polite"></div>
+
+  <section class="why" aria-labelledby="why-h">
+    <h2 id="why-h">Why first-timers stick with Zepto</h2>
+    <div class="why-grid">
+      <div class="why-card"><div class="em">⏱️</div><div><b>About 10 minutes, door to door</b><span>No delivery slots to book. Order when you need it.</span></div></div>
+      <div class="why-card"><div class="em">🛒</div><div><b>Groceries, snacks and home essentials</b><span>Everything for breakfast, dinner or a last-minute party in one order.</span></div></div>
+      <div class="why-card"><div class="em">📍</div><div><b>Live in your city</b><span>Mumbai, Delhi NCR, Bengaluru, Pune, Hyderabad and Chennai.</span></div></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Concept prototype for a case study, not an official Zepto page. Prices and offers are illustrative.<br><a href="strategy.html">Read the strategy note →</a></div>
+</footer>
+
+<div class="scrim" id="scrim" role="dialog" aria-modal="true" aria-labelledby="sheet-h">
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<script>
+/* ---------- Config (swap for live values) ---------- */
+var CONFIG = {
+  firstOrderOff: 100,       // illustrative first-order discount, ₹
+  minOrderForOff: 199,      // illustrative minimum order for the discount
+  deliveryFee: 30,          // illustrative fee waived on the first order
+  cartDeepLink: "zepto://cart?prefill=" // production: cart pre-filled via deep link / web cart API
+};
+
+/* ---------- Data ---------- */
+var MISSIONS = [
+  {id:"breakfast", em:"🍳", t:"Tomorrow's breakfast", s:"Milk, bread, eggs"},
+  {id:"dinner",    em:"🍛", t:"Cook dinner tonight",  s:"Fresh veg, paneer, rice"},
+  {id:"munchies",  em:"🍿", t:"Late-night munchies",  s:"Chips, Maggi, cold drinks"},
+  {id:"weekly",    em:"🥦", t:"Weekly fruit & veg",   s:"Restock the fridge"},
+  {id:"essentials",em:"🧴", t:"Ran out of basics",    s:"Daily home essentials"},
+  {id:"party",     em:"🎉", t:"Friends coming over",  s:"Snacks, drinks, cups"}
+];
+var HOUSE = [
+  {id:"solo",   em:"🙋", t:"Just me",          s:"Living solo",       f:1},
+  {id:"couple", em:"👫", t:"Two of us",        s:"Partner or roomie", f:1.6},
+  {id:"family", em:"👨‍👩‍👧", t:"Family",           s:"3–4 people",        f:2.4},
+  {id:"flat",   em:"🏠", t:"Flatmates",        s:"4+ people",         f:3}
+];
+var CITIES = ["Mumbai","Delhi NCR","Bengaluru","Pune","Hyderabad","Chennai"];
+var HABITS = [
+  {id:"food",    t:"Swiggy / Zomato"},
+  {id:"bb",      t:"BigBasket"},
+  {id:"qc",      t:"Another quick app"},
+  {id:"kirana",  t:"Local kirana"}
+];
+// name, size, price (₹, illustrative), emoji, base qty, scales with household?
+var CATALOG = {
+  breakfast:[["Amul Taaza Toned Milk","500 ml",28,"🥛",2,1],["Brown Bread","400 g",50,"🍞",1,1],["Farm Fresh Eggs","6 pcs",54,"🥚",1,1],["Amul Butter","100 g",58,"🧈",1,0],["Robusta Bananas","6 pcs",45,"🍌",1,1],["Kellogg's Corn Flakes","475 g",190,"🥣",1,0]],
+  dinner:[["Paneer","200 g",90,"🧀",1,1],["Onion","1 kg",40,"🧅",1,0],["Tomato","500 g",30,"🍅",1,1],["Basmati Rice","1 kg",140,"🍚",1,0],["Fresh Coriander","100 g",12,"🌿",1,0],["Ginger Garlic Paste","200 g",45,"🫙",1,0]],
+  munchies:[["Lay's Magic Masala","50 g",20,"🥔",2,1],["Maggi Noodles","4-pack",56,"🍜",1,1],["Coca-Cola","750 ml",40,"🥤",1,1],["Dark Fantasy Choco Fills","75 g",40,"🍪",1,1],["Haldiram's Aloo Bhujia","200 g",55,"🥨",1,0],["Vanilla Ice Cream","700 ml",199,"🍨",1,0]],
+  weekly:[["Robusta Bananas","6 pcs",45,"🍌",1,1],["Shimla Apples","4 pcs",120,"🍎",1,1],["Potato","1 kg",35,"🥔",1,1],["Onion","1 kg",40,"🧅",1,1],["Tomato","500 g",30,"🍅",1,1],["Spinach","250 g",25,"🥬",1,0],["Cucumber","500 g",30,"🥒",1,0]],
+  essentials:[["Amul Taaza Toned Milk","500 ml",28,"🥛",2,1],["Brown Bread","400 g",50,"🍞",1,0],["Vim Dishwash Liquid","500 ml",110,"🧽",1,0],["Colgate Strong Teeth","200 g",99,"🪥",1,0],["Kitchen Towel Roll","2 rolls",120,"🧻",1,0],["Surf Excel Easy Wash","1 kg",140,"🧺",1,0]],
+  party:[["Lay's Classic Salted","90 g",40,"🥔",2,1],["Coca-Cola","2 L",95,"🥤",1,1],["Haldiram's Aloo Bhujia","400 g",99,"🥨",1,1],["Nachos with Salsa Dip","150 g",150,"🌮",1,1],["Ice Cubes","1 kg",40,"🧊",1,1],["Paper Cups","25 pcs",60,"🥂",1,0]]
+};
+var HABIT_COPY = {
+  food:   {h:"You already order food in. This is the same idea for groceries.", b:"Same doorstep convenience, priced like a grocery store."},
+  bb:     {h:"No delivery slot needed.", b:"Your basket arrives in about 10 minutes instead of a booked slot later."},
+  qc:     {h:"Already used to quick delivery?", b:"Try Zepto for this basket. Your first-order offer is applied automatically."},
+  kirana: {h:"Skip the trip and the out-of-stock replies.", b:"Everything on this list comes in one order, to your door."}
+};
+
+/* ---------- State ---------- */
+var S = {step:0, mission:null, house:null, city:null, habit:null, basket:[]};
+var card = document.getElementById("card");
+window.dataLayer = window.dataLayer || [];
+function track(ev, p){ var o = Object.assign({event:ev, ts:Date.now()}, p||{}); window.dataLayer.push(o); }
+
+function rupee(n){ return "₹" + n.toLocaleString("en-IN"); }
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function progress(n){ var h='<div class="progress" aria-hidden="true">'; for(var i=1;i<=4;i++) h+='<i class="'+(i<=n?'on':'')+'"></i>'; return h+'</div>'; }
+function optBtn(o, sel, key){
+  return '<button class="opt" data-k="'+key+'" data-v="'+o.id+'" aria-pressed="'+(sel===o.id)+'"><span class="em">'+o.em+'</span><b>'+esc(o.t)+'</b><small>'+esc(o.s)+'</small></button>';
+}
+
+/* ---------- Screens ---------- */
+function render(){
+  var h = "";
+  if (S.step === 0){
+    h = '<p class="step-label">Your first basket</p>'+
+        '<h2 class="q">See how Zepto fits your day before you shop</h2>'+
+        '<ul class="intro-list">'+
+          '<li><span class="num">1</span><span>Tell us what you need right now</span></li>'+
+          '<li><span class="num">2</span><span>Tell us who it\'s for and where you are</span></li>'+
+          '<li><span class="num">3</span><span>Get a ready basket and add it in one tap</span></li>'+
+        '</ul>'+
+        '<button class="primary" data-act="start">Build my basket →</button>'+
+        '<p class="fine">Takes about 30 seconds · No login needed</p>';
+  } else if (S.step === 1){
+    h = progress(1)+'<p class="step-label">Step 1 of 3</p><h2 class="q">What are you shopping for right now?</h2>'+
+        '<div class="grid">'+MISSIONS.map(function(o){return optBtn(o,S.mission,"mission");}).join("")+'</div>';
+  } else if (S.step === 2){
+    h = progress(2)+'<p class="step-label">Step 2 of 3</p><h2 class="q">Who are you shopping for?</h2>'+
+        '<p class="sub">We\'ll set the quantities for you.</p>'+
+        '<div class="grid">'+HOUSE.map(function(o){return optBtn(o,S.house,"house");}).join("")+'</div>'+
+        '<button class="back" data-act="back">← Back</button>';
+  } else if (S.step === 3){
+    h = progress(3)+'<p class="step-label">Step 3 of 3</p><h2 class="q">Where are you, and where do you usually shop?</h2>'+
+        '<p class="lbl">Your city</p><div class="chips">'+CITIES.map(function(c){
+          return '<button class="chip" data-k="city" data-v="'+c+'" aria-pressed="'+(S.city===c)+'">'+c+'</button>';}).join("")+'</div>'+
+        '<p class="lbl">You usually order from</p><div class="chips">'+HABITS.map(function(o){
+          return '<button class="chip" data-k="habit" data-v="'+o.id+'" aria-pressed="'+(S.habit===o.id)+'">'+esc(o.t)+'</button>';}).join("")+'</div>'+
+        '<button class="primary" data-act="build" '+(S.city&&S.habit?'':'disabled')+'>Show my basket</button>'+
+        '<button class="back" data-act="back">← Back</button>';
+  } else if (S.step === 4){
+    h = progress(4)+renderResult();
+  }
+  card.innerHTML = '<div class="fade">'+h+'</div>';
+}
+
+function buildBasket(){
+  var f = HOUSE.filter(function(x){return x.id===S.house;})[0].f;
+  S.basket = CATALOG[S.mission].map(function(r){
+    var q = r[5] ? Math.max(1, Math.round(r[4]*f)) : r[4];
+    return {n:r[0], sz:r[1], p:r[2], em:r[3], q:q};
+  });
+}
+function sums(){
+  var items = 0, sub = 0;
+  S.basket.forEach(function(i){ items += i.q; sub += i.q*i.p; });
+  var off = sub >= CONFIG.minOrderForOff ? CONFIG.firstOrderOff : 0;
+  return {items:items, sub:sub, off:off, fee:CONFIG.deliveryFee, total:Math.max(0, sub-off)};
+}
+function renderResult(){
+  var m = MISSIONS.filter(function(x){return x.id===S.mission;})[0];
+  var t = sums(), hc = HABIT_COPY[S.habit];
+  var rows = S.basket.map(function(i,ix){
+    if (!i.q) return "";
+    return '<li class="item"><div class="thumb" aria-hidden="true">'+i.em+'</div>'+
+      '<div class="meta"><div class="nm">'+esc(i.n)+'</div><div class="sz">'+esc(i.sz)+' · '+rupee(i.p)+'</div></div>'+
+      '<div class="stepper"><button data-act="dec" data-i="'+ix+'" aria-label="Remove one '+esc(i.n)+'">−</button><span>'+i.q+'</span><button data-act="inc" data-i="'+ix+'" aria-label="Add one '+esc(i.n)+'">+</button></div>'+
+      '<div class="pr">'+rupee(i.p*i.q)+'</div></li>';
+  }).join("");
+  var need = CONFIG.minOrderForOff - t.sub;
+  return '<div class="result-head"><div><p class="step-label">Your basket is ready</p><h2 class="q" style="margin-bottom:0">'+m.em+' '+esc(m.t)+'</h2></div>'+
+    '<div class="eta">⚡ ~10 min<br><span style="font-weight:600">'+esc(S.city)+'</span></div></div>'+
+    '<ul class="items">'+(rows || '<li class="item"><span class="sz">Basket is empty. Add something back with Edit answers.</span></li>')+'</ul>'+
+    '<div class="fit"><b>'+esc(hc.h)+'</b>'+esc(hc.b)+'</div>'+
+    '<div class="totals"><span>Item total ('+t.items+')</span><span>'+rupee(t.sub)+'</span></div>'+
+    '<div class="totals"><span>Delivery fee</span><span class="save"><s style="color:var(--muted);font-weight:400">'+rupee(t.fee)+'</s> FREE</span></div>'+
+    (t.off ? '<div class="totals"><span>First-order discount</span><span class="save">−'+rupee(t.off)+'</span></div>'
+           : '<div class="totals"><span>Add '+rupee(need)+' more to unlock '+rupee(CONFIG.firstOrderOff)+' off</span><span></span></div>')+
+    '<div class="totals grand"><span>To pay</span><span>'+rupee(t.total)+'</span></div>'+
+    '<button class="primary" data-act="cta" '+(t.items?'':'disabled')+'>Add '+t.items+' items to cart · '+rupee(t.total)+'</button>'+
+    '<button class="secondary" data-act="restart">Edit answers</button>'+
+    '<p class="fine">Indicative prices. Your offer is applied automatically at checkout.</p>';
+}
+
+function openSheet(){
+  var t = sums();
+  document.getElementById("sheet").innerHTML =
+    '<div class="tick" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>'+
+    '<h2 id="sheet-h">'+t.items+' items added to your cart</h2>'+
+    '<p>First-order offer applied · Arriving in ~10 min in '+esc(S.city)+'</p>'+
+    '<button class="primary" data-act="checkout">Proceed to checkout · '+rupee(t.total)+'</button>'+
+    '<button class="secondary" data-act="close">Keep browsing</button>'+
+    '<p class="fine" id="proto-note"></p>';
+  document.getElementById("scrim").classList.add("show");
+}
+function closeSheet(){ document.getElementById("scrim").classList.remove("show"); }
+
+/* ---------- Events ---------- */
+document.addEventListener("click", function(e){
+  var b = e.target.closest("button"); if (!b) return;
+  var k = b.getAttribute("data-k"), v = b.getAttribute("data-v"), a = b.getAttribute("data-act");
+  if (k === "mission"){ S.mission = v; track("widget_answer",{q:"mission",a:v}); S.step = 2; render(); return; }
+  if (k === "house"){ S.house = v; track("widget_answer",{q:"household",a:v}); S.step = 3; render(); return; }
+  if (k === "city" || k === "habit"){ S[k] = v; track("widget_answer",{q:k,a:v}); render(); return; }
+  if (a === "start"){ track("widget_start"); S.step = 1; render(); }
+  else if (a === "back"){ S.step = Math.max(1, S.step-1); render(); }
+  else if (a === "build"){ buildBasket(); S.step = 4; track("basket_shown",{mission:S.mission,household:S.house,city:S.city,habit:S.habit,value:sums().sub}); render(); }
+  else if (a === "inc" || a === "dec"){ var i = S.basket[+b.getAttribute("data-i")]; i.q = Math.max(0, i.q + (a==="inc"?1:-1)); track("basket_edit",{item:i.n,qty:i.q}); render(); }
+  else if (a === "restart"){ S.step = 1; render(); }
+  else if (a === "cta"){
+    var t = sums();
+    track("add_to_cart",{items:t.items,value:t.total,source:"first_basket_widget",
+      skus:S.basket.filter(function(i){return i.q;}).map(function(i){return {n:i.n,q:i.q};})});
+    openSheet();
+  }
+  else if (a === "checkout"){ track("checkout_start"); document.getElementById("proto-note").textContent = "Prototype: in production this opens checkout (address → payment) with the cart pre-filled."; }
+  else if (a === "close"){ closeSheet(); }
+});
+document.getElementById("scrim").addEventListener("click", function(e){ if (e.target.id === "scrim") closeSheet(); });
+document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeSheet(); });
+
+render();
+</script>
+
+</body>
+</html>
